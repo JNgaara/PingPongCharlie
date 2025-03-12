@@ -146,4 +146,4 @@ while True:
 	screen.blit(opponent_text,(600,470))
 
 	pygame.display.flip()
-	clock.tick(60)
+	clock.tick(45)
