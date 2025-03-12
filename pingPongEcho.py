@@ -140,10 +140,10 @@ while True:
 		ball_start()
 
 	player_text = basic_font.render(f'{player_score}',False,light_grey)
-	screen.blit(player_text,(660,470))
+	screen.blit(player_text,(660,10))
 
 	opponent_text = basic_font.render(f'{opponent_score}',False,light_grey)
-	screen.blit(opponent_text,(600,470))
+	screen.blit(opponent_text,(600,0))
 
 	pygame.display.flip()
 	clock.tick(45)
