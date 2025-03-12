@@ -9,12 +9,12 @@ def ball_animation():
 	if ball.top <= 0 or ball.bottom >= screen_height:
 		ball_speed_y *= -1
 		
-	# Player Score
+	# Player Scoreboard
 	if ball.left <= 0: 
 		score_time = pygame.time.get_ticks()
 		player_score += 1
 		
-	# Opponent Score
+	# Opponents AI Scoreboard
 	if ball.right >= screen_width:
 		score_time = pygame.time.get_ticks()
 		opponent_score += 1
@@ -78,27 +78,25 @@ def ball_start():
 		ball_speed_y = 7 * random.choice((1,-1))
 		score_time = None
 
-# General setup
 pygame.mixer.pre_init(44100,-16,1, 1024)
 pygame.init()
 clock = pygame.time.Clock()
 
-# Main Window
 screen_width = 1280
 screen_height = 960
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('Pong')
 
-# Colors
+#background colours and player colours
 light_grey = ('cyan3')
 bg_color = pygame.Color('darkred')
 
-# Game Rectangles
+# surface Rectangles
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)
 player = pygame.Rect(screen_width - 20 -3, screen_height / 2 - 70, 10 ,140)
 opponent = pygame.Rect(10, screen_height / 2 - 70, 10,140)
 
-# Game Variables
+# the ping game Variables
 ball_speed_x = 7 * random.choice((1,-1))
 ball_speed_y = 7 * random.choice((1,-1))
 player_speed = 0
@@ -106,7 +104,7 @@ opponent_speed = 7
 ball_moving = False
 score_time = True
 
-# Score Text
+# Score written output
 player_score = 0
 opponent_score = 0
 basic_font = pygame.font.Font('freesansbold.ttf', 32)
@@ -128,12 +126,10 @@ while True:
 			if event.key == pygame.K_DOWN:
 				player_speed -= 6
 	
-	#Game Logic
 	ball_animation()
 	player_animation()
 	opponent_ai()
 
-	# Visuals 
 	screen.fill(bg_color)
 	pygame.draw.rect(screen, light_grey, player)
 	pygame.draw.rect(screen, light_grey, opponent)
