@@ -1,6 +1,6 @@
 import pygame, sys, random
 
-def ball_animation():
+def ball_movement():
 	global ball_speed_x, ball_speed_y, player_score, opponent_score, score_time
 	
 	ball.x += ball_speed_x
@@ -36,7 +36,7 @@ def ball_animation():
 			ball_speed_y *= -1
 		
 
-def player_animation():
+def player_movement():
 	player.y += player_speed
 
 	if player.top <= 0:
@@ -44,7 +44,7 @@ def player_animation():
 	if player.bottom >= screen_height:
 		player.bottom = screen_height
 
-def opponent_ai():
+def opponent_CPU():
 	if opponent.top < ball.y:
 		opponent.y += opponent_speed
 	if opponent.bottom > ball.y:
@@ -62,13 +62,13 @@ def ball_start():
 	current_time = pygame.time.get_ticks()
 
 	if current_time - score_time < 700:
-		number_three = basic_font.render("3",False,light_grey)
+		number_three = basic_font.render("3",False,turqoiseBlue)
 		screen.blit(number_three,(screen_width/2 - 10, screen_height/2 + 20))
 	if 700 < current_time - score_time < 1400:
-		number_two = basic_font.render("2",False,light_grey)
+		number_two = basic_font.render("2",False,turqoiseBlue)
 		screen.blit(number_two,(screen_width/2 - 10, screen_height/2 + 20))
 	if 1400 < current_time - score_time < 2100:
-		number_one = basic_font.render("1",False,light_grey)
+		number_one = basic_font.render("1",False,turqoiseBlue)
 		screen.blit(number_one,(screen_width/2 - 10, screen_height/2 + 20))
 
 	if current_time - score_time < 2100:
@@ -85,10 +85,10 @@ clock = pygame.time.Clock()
 screen_width = 1280
 screen_height = 960
 screen = pygame.display.set_mode((screen_width,screen_height))
-pygame.display.set_caption('Pong')
+pygame.display.set_caption('Ping Pong table')
 
 #background colours and player colours
-light_grey = ('cyan3')
+turqoiseBlue = ('cyan3')
 bg_color = pygame.Color('darkred')
 
 # surface Rectangles
@@ -126,24 +126,24 @@ while True:
 			if event.key == pygame.K_DOWN:
 				player_speed -= 6
 	
-	ball_animation()
-	player_animation()
-	opponent_ai()
+	ball_movement()
+	player_movement()
+	opponent_CPU()
 
 	screen.fill(bg_color)
-	pygame.draw.rect(screen, light_grey, player)
-	pygame.draw.rect(screen, light_grey, opponent)
-	pygame.draw.ellipse(screen, light_grey, ball)
-	pygame.draw.aaline(screen, light_grey, (screen_width / 2, 0),(screen_width / 2, screen_height))
+	pygame.draw.rect(screen, turqoiseBlue, player)
+	pygame.draw.rect(screen, turqoiseBlue, opponent)
+	pygame.draw.ellipse(screen, turqoiseBlue, ball)
+	pygame.draw.aaline(screen, turqoiseBlue, (screen_width / 2, 0),(screen_width / 2, screen_height))
 
 	if score_time:
 		ball_start()
 
-	player_text = basic_font.render(f'{player_score}',False,light_grey)
+	player_text = basic_font.render(f'{player_score}',False,turqoiseBlue)
 	screen.blit(player_text,(660,10))
 
-	opponent_text = basic_font.render(f'{opponent_score}',False,light_grey)
-	screen.blit(opponent_text,(600,0))
+	opponent_text = basic_font.render(f'{opponent_score}',False,turqoiseBlue)
+	screen.blit(opponent_text,(600,10))
 
 	pygame.display.flip()
 	clock.tick(45)
